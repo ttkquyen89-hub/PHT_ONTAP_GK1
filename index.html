@@ -1,0 +1,880 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ôn Tập Giữa Học Kỳ I - Khối 8</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f3f4f6;
+            scroll-behavior: smooth;
+        }
+
+        /* Tùy chỉnh thanh cuộn */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1; 
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #cbd5e1; 
+            border-radius: 5px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #94a3b8; 
+        }
+
+        /* Ẩn radio button mặc định và tạo custom radio */
+        input[type="radio"].custom-radio {
+            display: none;
+        }
+        
+        .radio-label {
+            display: flex;
+            align-items: center;
+            padding: 1rem 1.5rem;
+            border-radius: 0.75rem;
+            border: 2px solid transparent;
+            cursor: pointer;
+            transition: all 0.2s ease-in-out;
+            background-color: rgba(255, 255, 255, 0.6);
+        }
+
+        .radio-label:hover {
+            background-color: rgba(255, 255, 255, 0.9);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Custom tick cho Đ/S table */
+        .tf-radio {
+            width: 2rem;
+            height: 2rem;
+            cursor: pointer;
+            accent-color: #3b82f6;
+        }
+
+        /* Trạng thái được chọn */
+        input[type="radio"]:checked + .radio-label {
+            background-color: #ffffff;
+            border-color: #3b82f6;
+            box-shadow: 0 4px 6px -1px rgba(59, 130, 246, 0.2);
+            font-weight: 600;
+        }
+
+        .radio-circle {
+            width: 1.5rem;
+            height: 1.5rem;
+            border-radius: 50%;
+            border: 2px solid #94a3b8;
+            margin-right: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            transition: all 0.2s ease;
+        }
+
+        input[type="radio"]:checked + .radio-label .radio-circle {
+            border-color: #3b82f6;
+            background-color: #3b82f6;
+        }
+
+        input[type="radio"]:checked + .radio-label .radio-circle::after {
+            content: '';
+            width: 0.5rem;
+            height: 0.5rem;
+            background-color: white;
+            border-radius: 50%;
+        }
+
+        /* Các lớp màu sắc luân phiên cho thẻ câu hỏi */
+        .card-color-1 { background-color: #eff6ff; border-left: 6px solid #3b82f6; } /* Xanh dương */
+        .card-color-2 { background-color: #f0fdf4; border-left: 6px solid #22c55e; } /* Xanh lá */
+        .card-color-3 { background-color: #fefce8; border-left: 6px solid #eab308; } /* Vàng */
+        .card-color-4 { background-color: #fdf4ff; border-left: 6px solid #d946ef; } /* Hồng/Tím */
+        .card-color-5 { background-color: #fff7ed; border-left: 6px solid #f97316; } /* Cam */
+
+        .modal-overlay {
+            background-color: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(4px);
+        }
+    </style>
+</head>
+<body class="text-gray-800 antialiased selection:bg-blue-200">
+
+    <!-- Header -->
+    <header class="bg-white shadow-md sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 flex justify-between items-center">
+            <div>
+                <h1 class="text-3xl md:text-4xl font-bold text-blue-700">ÔN TẬP GIỮA HỌC KỲ I</h1>
+                <p class="text-xl md:text-2xl text-gray-600 mt-2 font-medium">MÔN: KHOA HỌC TỰ NHIÊN - KHỐI 8</p>
+            </div>
+            <div class="hidden md:block">
+                <div class="bg-blue-100 text-blue-800 px-4 py-2 rounded-full font-semibold text-lg border border-blue-200 shadow-sm">
+                    Làm bài trực tiếp
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-8 py-10 space-y-8">
+        
+        <form id="quizForm" onsubmit="event.preventDefault(); submitQuiz();">
+            
+            <!-- Câu 1 -->
+            <div class="bg-white rounded-2xl shadow-lg p-6 md:p-8 card-color-1">
+                <h2 class="text-2xl md:text-3xl font-bold mb-6 text-gray-900">Câu 1. Dụng cụ nào sau đây được sử dụng phổ biến để đo thể tích chất lỏng trong phòng thí nghiệm?</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-xl">
+                    <label>
+                        <input type="radio" name="q1" value="A" class="custom-radio">
+                        <div class="radio-label"><div class="radio-circle"></div>A. Cân điện tử.</div>
+                    </label>
+                    <label>
+                        <input type="radio" name="q1" value="B" class="custom-radio">
+                        <div class="radio-label"><div class="radio-circle"></div>B. Ống đong.</div>
+                    </label>
+                    <label>
+                        <input type="radio" name="q1" value="C" class="custom-radio">
+                        <div class="radio-label"><div class="radio-circle"></div>C. Kẹp gỗ.</div>
+                    </label>
+                    <label>
+                        <input type="radio" name="q1" value="D" class="custom-radio">
+                        <div class="radio-label"><div class="radio-circle"></div>D. Đèn cồn.</div>
+                    </label>
+                </div>
+            </div>
+
+            <!-- Câu 2 -->
+            <div class="bg-white rounded-2xl shadow-lg p-6 md:p-8 card-color-2 mt-8">
+                <h2 class="text-2xl md:text-3xl font-bold mb-6 text-gray-900">Câu 2. Quy tắc an toàn nào sau đây không đúng khi làm việc trong phòng thí nghiệm?</h2>
+                <div class="grid grid-cols-1 gap-4 text-xl">
+                    <label>
+                        <input type="radio" name="q2" value="A" class="custom-radio">
+                        <div class="radio-label"><div class="radio-circle"></div>A. Tuyệt đối không nếm hoặc hít trực tiếp mùi hóa chất.</div>
+                    </label>
+                    <label>
+                        <input type="radio" name="q2" value="B" class="custom-radio">
+                        <div class="radio-label"><div class="radio-circle"></div>B. Rửa sạch tay bằng xà phòng sau khi làm thí nghiệm.</div>
+                    </label>
+                    <label>
+                        <input type="radio" name="q2" value="C" class="custom-radio">
+                        <div class="radio-label"><div class="radio-circle"></div>C. Đổ trực tiếp hóa chất dùng thừa trở lại chai chứa ban đầu.</div>
+                    </label>
+                    <label>
+                        <input type="radio" name="q2" value="D" class="custom-radio">
+                        <div class="radio-label"><div class="radio-circle"></div>D. Đọc kỹ nhãn hóa chất và hướng dẫn trước khi sử dụng.</div>
+                    </label>
+                </div>
+            </div>
+
+            <!-- Câu 3 -->
+            <div class="bg-white rounded-2xl shadow-lg p-6 md:p-8 card-color-3 mt-8">
+                <h2 class="text-2xl md:text-3xl font-bold mb-6 text-gray-900">Câu 3. Thiết bị điện như hình vẽ dưới đây có tên là gì?</h2>
+                
+                <div class="mb-6 flex justify-center">
+                    <!-- Ảnh placeholder mô phỏng dây dẫn/kẹp cá sấu -->
+                    <img src="https://placehold.co/400x300/f8fafc/334155?text=HÌNH+ẢNH\nDây+dẫn+kèm+kẹp+cá+sấu" alt="Hình thiết bị điện" class="rounded-xl shadow-md border border-gray-300 max-w-full h-auto">
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 text-xl">
+                    <label><input type="radio" name="q3" value="A" class="custom-radio"><div class="radio-label"><div class="radio-circle"></div>A. Dây dẫn.</div></label>
+                    <label><input type="radio" name="q3" value="B" class="custom-radio"><div class="radio-label"><div class="radio-circle"></div>B. Biến trở.</div></label>
+                    <label><input type="radio" name="q3" value="C" class="custom-radio"><div class="radio-label"><div class="radio-circle"></div>C. Khóa K.</div></label>
+                    <label><input type="radio" name="q3" value="D" class="custom-radio"><div class="radio-label"><div class="radio-circle"></div>D. Ổ cắm.</div></label>
+                </div>
+            </div>
+
+            <!-- Câu 4 -->
+            <div class="bg-white rounded-2xl shadow-lg p-6 md:p-8 card-color-4 mt-8">
+                <h2 class="text-2xl md:text-3xl font-bold mb-6 text-gray-900">Câu 4. Dấu hiệu nào sau đây chứng tỏ có phản ứng hóa học xảy ra?</h2>
+                <div class="grid grid-cols-1 gap-4 text-xl">
+                    <label><input type="radio" name="q4" value="A" class="custom-radio"><div class="radio-label"><div class="radio-circle"></div>A. Dạng kích thước của chất bị thay đổi.</div></label>
+                    <label><input type="radio" name="q4" value="B" class="custom-radio"><div class="radio-label"><div class="radio-circle"></div>B. Có sự thay đổi màu sắc, tạo kết tủa hoặc thoát khí.</div></label>
+                    <label><input type="radio" name="q4" value="C" class="custom-radio"><div class="radio-label"><div class="radio-circle"></div>C. Chất chuyển trạng thái từ thể rắn sang thể lỏng.</div></label>
+                    <label><input type="radio" name="q4" value="D" class="custom-radio"><div class="radio-label"><div class="radio-circle"></div>D. Chất hòa tan hoàn toàn vào nước tạo thành dung dịch.</div></label>
+                </div>
+            </div>
+
+            <!-- Câu 5 -->
+            <div class="bg-white rounded-2xl shadow-lg p-6 md:p-8 card-color-5 mt-8">
+                <h2 class="text-2xl md:text-3xl font-bold mb-6 text-gray-900">Câu 5. Trong các quá trình biến đổi bên dưới, quá trình biến đổi hóa học là</h2>
+                <div class="grid grid-cols-1 gap-4 text-xl">
+                    <label><input type="radio" name="q5" value="A" class="custom-radio"><div class="radio-label"><div class="radio-circle"></div>A. thủy tinh bị nóng chảy ở nhiệt độ cao.</div></label>
+                    <label><input type="radio" name="q5" value="B" class="custom-radio"><div class="radio-label"><div class="radio-circle"></div>B. cồn bay hơi khi mở nắp lọ.</div></label>
+                    <label><input type="radio" name="q5" value="C" class="custom-radio"><div class="radio-label"><div class="radio-circle"></div>C. dây sắt (iron) bị gỉ thành xốp đỏ trong không khí ẩm.</div></label>
+                    <label><input type="radio" name="q5" value="D" class="custom-radio"><div class="radio-label"><div class="radio-circle"></div>D. hòa tan đường vào nước ấm.</div></label>
+                </div>
+            </div>
+
+            <!-- Câu 6 -->
+            <div class="bg-white rounded-2xl shadow-lg p-6 md:p-8 card-color-1 mt-8">
+                <h2 class="text-2xl md:text-3xl font-bold mb-6 text-gray-900">Câu 6. Dung dịch là</h2>
+                <div class="grid grid-cols-1 gap-4 text-xl">
+                    <label><input type="radio" name="q6" value="A" class="custom-radio"><div class="radio-label"><div class="radio-circle"></div>A. hỗn hợp không đồng nhất của chất tan và dung môi.</div></label>
+                    <label><input type="radio" name="q6" value="B" class="custom-radio"><div class="radio-label"><div class="radio-circle"></div>B. hỗn hợp đồng nhất của chất tan và dung môi.</div></label>
+                    <label><input type="radio" name="q6" value="C" class="custom-radio"><div class="radio-label"><div class="radio-circle"></div>C. chất lỏng tinh khiết không chứa chất hòa tan.</div></label>
+                    <label><input type="radio" name="q6" value="D" class="custom-radio"><div class="radio-label"><div class="radio-circle"></div>D. hỗn hợp gồm các hạt chất rắn không tan lơ lửng trong chất lỏng.</div></label>
+                </div>
+            </div>
+
+            <!-- Câu 7 -->
+            <div class="bg-white rounded-2xl shadow-lg p-6 md:p-8 card-color-2 mt-8">
+                <h2 class="text-2xl md:text-3xl font-bold mb-6 text-gray-900">Câu 7. Hòa tan hoàn toàn 15 gam muối ăn (NaCl) vào 135 gam nước cất. Nồng độ phần trăm (C%) của dung dịch NaCl thu được là</h2>
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-4 text-xl">
+                    <label><input type="radio" name="q7" value="A" class="custom-radio"><div class="radio-label"><div class="radio-circle"></div>A. 10%.</div></label>
+                    <label><input type="radio" name="q7" value="B" class="custom-radio"><div class="radio-label"><div class="radio-circle"></div>B. 11,1%.</div></label>
+                    <label><input type="radio" name="q7" value="C" class="custom-radio"><div class="radio-label"><div class="radio-circle"></div>C. 15%.</div></label>
+                    <label><input type="radio" name="q7" value="D" class="custom-radio"><div class="radio-label"><div class="radio-circle"></div>D. 90%.</div></label>
+                </div>
+            </div>
+
+            <!-- Câu 8 -->
+            <div class="bg-white rounded-2xl shadow-lg p-6 md:p-8 card-color-3 mt-8">
+                <h2 class="text-2xl md:text-3xl font-bold mb-6 text-gray-900">Câu 8. Theo định luật bảo toàn khối lượng, trong một phản ứng hóa học</h2>
+                <div class="grid grid-cols-1 gap-4 text-xl">
+                    <label><input type="radio" name="q8" value="A" class="custom-radio"><div class="radio-label"><div class="radio-circle"></div>A. tổng khối lượng sản phẩm lớn hơn tổng khối lượng chất tham gia.</div></label>
+                    <label><input type="radio" name="q8" value="B" class="custom-radio"><div class="radio-label"><div class="radio-circle"></div>B. tổng khối lượng sản phẩm nhỏ hơn tổng khối lượng chất tham gia.</div></label>
+                    <label><input type="radio" name="q8" value="C" class="custom-radio"><div class="radio-label"><div class="radio-circle"></div>C. tổng khối lượng các chất sản phẩm bằng tổng khối lượng các chất tham gia.</div></label>
+                    <label><input type="radio" name="q8" value="D" class="custom-radio"><div class="radio-label"><div class="radio-circle"></div>D. khối lượng các chất tham gia luôn tăng dần theo thời gian.</div></label>
+                </div>
+            </div>
+
+            <!-- Câu 9 -->
+            <div class="bg-white rounded-2xl shadow-lg p-6 md:p-8 card-color-4 mt-8">
+                <h2 class="text-2xl md:text-3xl font-bold mb-6 text-gray-900">Câu 9. Khi cho một viên kẽm (Zn) tác dụng với dung dịch hydrochloric acid (HCl) trong một cốc thủy tinh không có nắp đậy đặt trên đĩa cân điện tử, học sinh quan sát thấy bọt khí thoát ra mạnh và chỉ số trên cân điện tử giảm dần. Nguyên nhân chính của hiện tượng này là gì?</h2>
+                <div class="grid grid-cols-1 gap-4 text-xl">
+                    <label><input type="radio" name="q9" value="A" class="custom-radio"><div class="radio-label"><div class="radio-circle"></div>A. Định luật bảo toàn khối lượng không áp dụng đối với các phản ứng tạo thành chất khí.</div></label>
+                    <label><input type="radio" name="q9" value="B" class="custom-radio"><div class="radio-label"><div class="radio-circle"></div>B. Khối lượng của nguyên tố kẽm bị tiêu hao hoàn toàn sau phản ứng.</div></label>
+                    <label><input type="radio" name="q9" value="C" class="custom-radio"><div class="radio-label"><div class="radio-circle"></div>C. Khí hydrogen (H<sub>2</sub>) sinh ra đã thoát ra ngoài không khí, làm tổng khối lượng các chất còn lại trong cốc giảm xuống.</div></label>
+                    <label><input type="radio" name="q9" value="D" class="custom-radio"><div class="radio-label"><div class="radio-circle"></div>D. Cân điện tử bị sai lệch do tác dụng nhiệt từ phản ứng.</div></label>
+                </div>
+            </div>
+
+            <!-- Câu 10 -->
+            <div class="bg-white rounded-2xl shadow-lg p-6 md:p-8 card-color-5 mt-8">
+                <h2 class="text-2xl md:text-3xl font-bold mb-6 text-gray-900">Câu 10. Khái niệm hiệu suất phản ứng (H) được tính bằng</h2>
+                <div class="grid grid-cols-1 gap-4 text-xl">
+                    <label><input type="radio" name="q10" value="A" class="custom-radio"><div class="radio-label"><div class="radio-circle"></div>A. tỉ số giữa lượng sản phẩm thu được thực tế và lượng sản phẩm tính theo lý thuyết.</div></label>
+                    <label><input type="radio" name="q10" value="B" class="custom-radio"><div class="radio-label"><div class="radio-circle"></div>B. tỉ số giữa lượng chất tham gia tính theo lý thuyết và lượng chất tham gia thực tế.</div></label>
+                    <label><input type="radio" name="q10" value="C" class="custom-radio"><div class="radio-label"><div class="radio-circle"></div>C. tỉ số giữa khối lượng dung dịch sau phản ứng và khối lượng dung dịch trước phản ứng.</div></label>
+                    <label><input type="radio" name="q10" value="D" class="custom-radio"><div class="radio-label"><div class="radio-circle"></div>D. tỉ số giữa thời gian phản ứng thực tế và thời gian phản ứng lý thuyết.</div></label>
+                </div>
+            </div>
+
+            <!-- Câu 11 -->
+            <div class="bg-white rounded-2xl shadow-lg p-6 md:p-8 card-color-1 mt-8">
+                <h2 class="text-2xl md:text-3xl font-bold mb-6 text-gray-900">Câu 11. Đốt cháy hoàn toàn 0,2 mol khí methane (CH<sub>4</sub>) trong oxygen thu được khí carbon dioxide (CO<sub>2</sub>) và nước (H<sub>2</sub>O) theo phương trình hóa học:<br>
+                <span class="block mt-4 text-center font-mono text-blue-700 bg-blue-100 py-3 rounded-xl border border-blue-200 shadow-sm">CH<sub>4</sub> + 2O<sub>2</sub> &rarr; CO<sub>2</sub> + 2H<sub>2</sub>O</span><br>
+                Thể tích khí CO<sub>2</sub> thu được ở điều kiện chuẩn (25°C, 1 bar) là</h2>
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-4 text-xl">
+                    <label><input type="radio" name="q11" value="A" class="custom-radio"><div class="radio-label"><div class="radio-circle"></div>A. 2,479 L.</div></label>
+                    <label><input type="radio" name="q11" value="B" class="custom-radio"><div class="radio-label"><div class="radio-circle"></div>B. 4,958 L.</div></label>
+                    <label><input type="radio" name="q11" value="C" class="custom-radio"><div class="radio-label"><div class="radio-circle"></div>C. 9,916 L.</div></label>
+                    <label><input type="radio" name="q11" value="D" class="custom-radio"><div class="radio-label"><div class="radio-circle"></div>D. 24,790 L.</div></label>
+                </div>
+            </div>
+
+            <!-- Câu 12 -->
+            <div class="bg-white rounded-2xl shadow-lg p-6 md:p-8 card-color-2 mt-8">
+                <h2 class="text-2xl md:text-3xl font-bold mb-6 text-gray-900">Câu 12. Khi nung đá vôi (CaCO<sub>3</sub>), lượng calcium oxide (CaO) thu được theo tính toán lý thuyết là 10 gam. Tuy nhiên, sau khi tiến hành thí nghiệm thực tế, người ta chỉ thu được 8 gam CaO. Hiệu suất (H%) của phản ứng nung vôi trên là</h2>
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-4 text-xl">
+                    <label><input type="radio" name="q12" value="A" class="custom-radio"><div class="radio-label"><div class="radio-circle"></div>A. 80%.</div></label>
+                    <label><input type="radio" name="q12" value="B" class="custom-radio"><div class="radio-label"><div class="radio-circle"></div>B. 125%.</div></label>
+                    <label><input type="radio" name="q12" value="C" class="custom-radio"><div class="radio-label"><div class="radio-circle"></div>C. 20%.</div></label>
+                    <label><input type="radio" name="q12" value="D" class="custom-radio"><div class="radio-label"><div class="radio-circle"></div>D. 85%.</div></label>
+                </div>
+            </div>
+
+            <!-- Câu 13 -->
+            <div class="bg-white rounded-2xl shadow-lg p-6 md:p-8 card-color-3 mt-8">
+                <h2 class="text-2xl md:text-3xl font-bold mb-6 text-gray-900">Câu 13. Đơn vị nào sau đây thường dùng để đo khối lượng riêng?</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-xl">
+                    <label><input type="radio" name="q13" value="A" class="custom-radio"><div class="radio-label"><div class="radio-circle"></div>A. Kilôgam (kg).</div></label>
+                    <label><input type="radio" name="q13" value="B" class="custom-radio"><div class="radio-label"><div class="radio-circle"></div>B. Kilôgam trên mét khối (kg/m³).</div></label>
+                    <label><input type="radio" name="q13" value="C" class="custom-radio"><div class="radio-label"><div class="radio-circle"></div>C. Mét khối (m³).</div></label>
+                    <label><input type="radio" name="q13" value="D" class="custom-radio"><div class="radio-label"><div class="radio-circle"></div>D. Mét trên giây (m/s).</div></label>
+                </div>
+            </div>
+
+            <!-- Câu 14 -->
+            <div class="bg-white rounded-2xl shadow-lg p-6 md:p-8 card-color-4 mt-8">
+                <h2 class="text-2xl md:text-3xl font-bold mb-6 text-gray-900">Câu 14. Một học sinh dùng lực kế và các vật có diện tích tiếp xúc khác nhau để khảo sát áp suất tác dụng lên mặt bàn. Khi giữ nguyên áp lực và giảm diện tích bề mặt bị ép thì áp suất thay đổi như thế nào?</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 text-xl">
+                    <label><input type="radio" name="q14" value="A" class="custom-radio"><div class="radio-label"><div class="radio-circle"></div>A. Áp suất giảm.</div></label>
+                    <label><input type="radio" name="q14" value="B" class="custom-radio"><div class="radio-label"><div class="radio-circle"></div>B. Áp suất tăng.</div></label>
+                    <label><input type="radio" name="q14" value="C" class="custom-radio"><div class="radio-label"><div class="radio-circle"></div>C. Áp suất không đổi.</div></label>
+                    <label><input type="radio" name="q14" value="D" class="custom-radio"><div class="radio-label"><div class="radio-circle"></div>D. Áp suất bằng 0.</div></label>
+                </div>
+            </div>
+
+            <!-- Câu 15 -->
+            <div class="bg-white rounded-2xl shadow-lg p-6 md:p-8 card-color-5 mt-8">
+                <h2 class="text-2xl md:text-3xl font-bold mb-6 text-gray-900">Câu 15. Đơn vị nào sau đây là đơn vị đo áp suất?</h2>
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-4 text-xl">
+                    <label><input type="radio" name="q15" value="A" class="custom-radio"><div class="radio-label"><div class="radio-circle"></div>A. N</div></label>
+                    <label><input type="radio" name="q15" value="B" class="custom-radio"><div class="radio-label"><div class="radio-circle"></div>B. N.m</div></label>
+                    <label><input type="radio" name="q15" value="C" class="custom-radio"><div class="radio-label"><div class="radio-circle"></div>C. N/m</div></label>
+                    <label><input type="radio" name="q15" value="D" class="custom-radio"><div class="radio-label"><div class="radio-circle"></div>D. N/m²</div></label>
+                </div>
+            </div>
+
+            <!-- Câu 16 (Lần 1 - Theo đề bài gốc) -->
+            <div class="bg-white rounded-2xl shadow-lg p-6 md:p-8 card-color-1 mt-8">
+                <h2 class="text-2xl md:text-3xl font-bold mb-6 text-gray-900">Câu 16. Một vật chìm trong chất lỏng khi nào?</h2>
+                <div class="grid grid-cols-1 gap-4 text-xl">
+                    <label><input type="radio" name="q16_1" value="A" class="custom-radio"><div class="radio-label"><div class="radio-circle"></div>A. Lực đẩy Ác-si-mét lớn hơn trọng lượng vật.</div></label>
+                    <label><input type="radio" name="q16_1" value="B" class="custom-radio"><div class="radio-label"><div class="radio-circle"></div>B. Lực đẩy Ác-si-mét bằng trọng lượng vật.</div></label>
+                    <label><input type="radio" name="q16_1" value="C" class="custom-radio"><div class="radio-label"><div class="radio-circle"></div>C. Lực đẩy Ác-si-mét nhỏ hơn trọng lượng vật.</div></label>
+                    <label><input type="radio" name="q16_1" value="D" class="custom-radio"><div class="radio-label"><div class="radio-circle"></div>D. Lực đẩy Ác-si-mét không phụ thuộc vào trọng lượng vật.</div></label>
+                </div>
+            </div>
+
+            <!-- Câu 17 -->
+            <div class="bg-white rounded-2xl shadow-lg p-6 md:p-8 card-color-2 mt-8">
+                <h2 class="text-2xl md:text-3xl font-bold mb-6 text-gray-900">Câu 17. Điều nào sau đây không được làm khi sử dụng hóa chất thí nghiệm?</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-xl">
+                    <label><input type="radio" name="q17" value="A" class="custom-radio"><div class="radio-label"><div class="radio-circle"></div>A. Đậy kín lọ hóa chất sau khi lấy hóa chất.</div></label>
+                    <label><input type="radio" name="q17" value="B" class="custom-radio"><div class="radio-label"><div class="radio-circle"></div>B. Ngửi hóa chất trước khi làm thí nghiệm.</div></label>
+                    <label><input type="radio" name="q17" value="C" class="custom-radio"><div class="radio-label"><div class="radio-circle"></div>C. Đọc kĩ nhãn mác của lọ hóa chất.</div></label>
+                    <label><input type="radio" name="q17" value="D" class="custom-radio"><div class="radio-label"><div class="radio-circle"></div>D. Thông báo cho thầy cô khi có sự cố cháy nổ.</div></label>
+                </div>
+            </div>
+
+            <!-- Câu 18 -->
+            <div class="bg-white rounded-2xl shadow-lg p-6 md:p-8 card-color-3 mt-8">
+                <h2 class="text-2xl md:text-3xl font-bold mb-6 text-gray-900">Câu 18. Khi thấy người bị điện giật thì việc nào sau đây không được làm?</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-xl">
+                    <label><input type="radio" name="q18" value="A" class="custom-radio"><div class="radio-label"><div class="radio-circle"></div>A. Chạy đến dùng tay kéo người bị giật ra.</div></label>
+                    <label><input type="radio" name="q18" value="B" class="custom-radio"><div class="radio-label"><div class="radio-circle"></div>B. Tắt hệ thống điện.</div></label>
+                    <label><input type="radio" name="q18" value="C" class="custom-radio"><div class="radio-label"><div class="radio-circle"></div>C. Lấy gậy khô gạt dây điện ra khỏi người bị giật.</div></label>
+                    <label><input type="radio" name="q18" value="D" class="custom-radio"><div class="radio-label"><div class="radio-circle"></div>D. Gọi người khác đến hỗ trợ.</div></label>
+                </div>
+            </div>
+
+            <!-- Câu 19 -->
+            <div class="bg-white rounded-2xl shadow-lg p-6 md:p-8 card-color-4 mt-8">
+                <h2 class="text-2xl md:text-3xl font-bold mb-6 text-gray-900">Câu 19. Để an toàn khi sử dụng điện trong phòng thực hành thì các dây điện cần phải</h2>
+                <div class="grid grid-cols-1 gap-4 text-xl">
+                    <label><input type="radio" name="q19" value="A" class="custom-radio"><div class="radio-label"><div class="radio-circle"></div>A. để trần dây kim loại, không bọc.</div></label>
+                    <label><input type="radio" name="q19" value="B" class="custom-radio"><div class="radio-label"><div class="radio-circle"></div>B. bọc vỏ cách điện đạt tiêu chuẩn và nối thành nhiều đoạn.</div></label>
+                    <label><input type="radio" name="q19" value="C" class="custom-radio"><div class="radio-label"><div class="radio-circle"></div>C. bọc vỏ cách điện đạt tiêu chuẩn và chỉ nên dùng một đoạn.</div></label>
+                    <label><input type="radio" name="q19" value="D" class="custom-radio"><div class="radio-label"><div class="radio-circle"></div>D. bọc bằng kim loại khác.</div></label>
+                </div>
+            </div>
+
+            <!-- Câu 20 -->
+            <div class="bg-white rounded-2xl shadow-lg p-6 md:p-8 card-color-5 mt-8">
+                <h2 class="text-2xl md:text-3xl font-bold mb-6 text-gray-900">Câu 20. Sự biến đổi nào sau đây không phải là biến đổi hóa học?</h2>
+                <div class="grid grid-cols-1 gap-4 text-xl">
+                    <label><input type="radio" name="q20" value="A" class="custom-radio"><div class="radio-label"><div class="radio-circle"></div>A. Hơi nến cháy trong không khí tạo thành khí carbonic và hơi nước.</div></label>
+                    <label><input type="radio" name="q20" value="B" class="custom-radio"><div class="radio-label"><div class="radio-circle"></div>B. Hòa tan muối ăn vào nước tạo thành dung dịch muối.</div></label>
+                    <label><input type="radio" name="q20" value="C" class="custom-radio"><div class="radio-label"><div class="radio-circle"></div>C. Iron cháy trong sulfur tạo thành muối iron (II) sulfide.</div></label>
+                    <label><input type="radio" name="q20" value="D" class="custom-radio"><div class="radio-label"><div class="radio-circle"></div>D. Khí hydrogen cháy trong oxygen tạo thành nước.</div></label>
+                </div>
+            </div>
+
+            <!-- Câu 21 -->
+            <div class="bg-white rounded-2xl shadow-lg p-6 md:p-8 card-color-1 mt-8">
+                <h2 class="text-2xl md:text-3xl font-bold mb-6 text-gray-900">Câu 21. Phản ứng nào sau đây là phản ứng thu nhiệt?</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-xl">
+                    <label><input type="radio" name="q21" value="A" class="custom-radio"><div class="radio-label"><div class="radio-circle"></div>A. Phản ứng cháy của C<sub>2</sub>H<sub>5</sub>OH.</div></label>
+                    <label><input type="radio" name="q21" value="B" class="custom-radio"><div class="radio-label"><div class="radio-circle"></div>B. Phản ứng nung đá vôi (CaCO<sub>3</sub>).</div></label>
+                    <label><input type="radio" name="q21" value="C" class="custom-radio"><div class="radio-label"><div class="radio-circle"></div>C. Phản ứng cháy của sulfur (S) trong không khí.</div></label>
+                    <label><input type="radio" name="q21" value="D" class="custom-radio"><div class="radio-label"><div class="radio-circle"></div>D. Phản ứng cháy của carbon (C) trong khí O<sub>2</sub>.</div></label>
+                </div>
+            </div>
+
+            <!-- Câu 22 (Dạng bảng) -->
+            <div class="bg-white rounded-2xl shadow-lg p-6 md:p-8 card-color-2 mt-8 overflow-hidden">
+                <h2 class="text-2xl md:text-3xl font-bold mb-6 text-gray-900">Câu 22. Trong cuộc sống hằng ngày, gia đình bạn An thường sử dụng bếp than và bếp củi để nấu ăn. An nhận thấy rằng cách chuẩn bị nhiên liệu và cách nhóm lửa khác nhau sẽ ảnh hưởng đến tốc độ cháy của than, củi. Hãy xác định các phát biểu sau là Đúng (Đ) hay Sai (S)?</h2>
+                
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left border-collapse min-w-[600px]">
+                        <thead>
+                            <tr class="bg-green-100 text-green-900 text-xl">
+                                <th class="p-4 border-b-2 border-green-200 text-center font-bold rounded-tl-xl w-16">TT</th>
+                                <th class="p-4 border-b-2 border-green-200 font-bold">Phát biểu</th>
+                                <th class="p-4 border-b-2 border-green-200 text-center font-bold w-24">Đúng (Đ)</th>
+                                <th class="p-4 border-b-2 border-green-200 text-center font-bold rounded-tr-xl w-24">Sai (S)</th>
+                            </tr>
+                        </thead>
+                        <tbody class="text-lg">
+                            <tr class="hover:bg-gray-50 border-b border-gray-200">
+                                <td class="p-4 text-center font-semibold">a</td>
+                                <td class="p-4">Đập nhỏ viên than thành các mảnh nhỏ trước khi cho vào lò giúp than cháy nhanh và mãnh liệt hơn so với để nguyên viên than to, do làm tăng diện tích bề mặt tiếp xúc với oxygen.</td>
+                                <td class="p-4 text-center"><input type="radio" name="q22_a" value="D" class="tf-radio"></td>
+                                <td class="p-4 text-center"><input type="radio" name="q22_a" value="S" class="tf-radio"></td>
+                            </tr>
+                            <tr class="hover:bg-gray-50 border-b border-gray-200">
+                                <td class="p-4 text-center font-semibold">b</td>
+                                <td class="p-4">Quạt gió vào bếp than đang cháy giúp bổ sung liên tục khí oxygen, từ đó làm tăng tốc độ phản ứng cháy.</td>
+                                <td class="p-4 text-center"><input type="radio" name="q22_b" value="D" class="tf-radio"></td>
+                                <td class="p-4 text-center"><input type="radio" name="q22_b" value="S" class="tf-radio"></td>
+                            </tr>
+                            <tr class="hover:bg-gray-50 border-b border-gray-200">
+                                <td class="p-4 text-center font-semibold">c</td>
+                                <td class="p-4">Việc xếp các thanh củi thật chặt, khít lên nhau sẽ giúp củi cháy nhanh hơn so với việc xếp củi thông thoáng.</td>
+                                <td class="p-4 text-center"><input type="radio" name="q22_c" value="D" class="tf-radio"></td>
+                                <td class="p-4 text-center"><input type="radio" name="q22_c" value="S" class="tf-radio"></td>
+                            </tr>
+                            <tr class="hover:bg-gray-50">
+                                <td class="p-4 text-center font-semibold">d</td>
+                                <td class="p-4">Khi nhóm lửa, dùng củi bào mỏng sẽ dễ bắt lửa và cháy nhanh hơn củi gỗ dạng thanh to cùng khối lượng vì củi bào có tổng diện tích tiếp xúc lớn hơn.</td>
+                                <td class="p-4 text-center"><input type="radio" name="q22_d" value="D" class="tf-radio"></td>
+                                <td class="p-4 text-center"><input type="radio" name="q22_d" value="S" class="tf-radio"></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Câu 16 (Lần 2 - Theo đề bài gốc đánh số trùng) -->
+            <div class="bg-white rounded-2xl shadow-lg p-6 md:p-8 card-color-3 mt-8 overflow-hidden">
+                <h2 class="text-2xl md:text-3xl font-bold mb-6 text-gray-900">Câu 16 (Tiếp). Hãy xác định tính đúng hoặc sai của các phát biểu sau về áp suất trong chất lỏng và áp suất không khí.</h2>
+                
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left border-collapse min-w-[600px]">
+                        <thead>
+                            <tr class="bg-yellow-100 text-yellow-900 text-xl">
+                                <th class="p-4 border-b-2 border-yellow-200 text-center font-bold rounded-tl-xl w-16">TT</th>
+                                <th class="p-4 border-b-2 border-yellow-200 font-bold">Phát biểu</th>
+                                <th class="p-4 border-b-2 border-yellow-200 text-center font-bold w-24">Đúng (Đ)</th>
+                                <th class="p-4 border-b-2 border-yellow-200 text-center font-bold rounded-tr-xl w-24">Sai (S)</th>
+                            </tr>
+                        </thead>
+                        <tbody class="text-lg">
+                            <tr class="hover:bg-gray-50 border-b border-gray-200">
+                                <td class="p-4 text-center font-semibold">a</td>
+                                <td class="p-4">Chất lỏng truyền áp suất tác dụng lên nó nguyên vẹn theo mọi hướng.</td>
+                                <td class="p-4 text-center"><input type="radio" name="q16_2_a" value="D" class="tf-radio"></td>
+                                <td class="p-4 text-center"><input type="radio" name="q16_2_a" value="S" class="tf-radio"></td>
+                            </tr>
+                            <tr class="hover:bg-gray-50 border-b border-gray-200">
+                                <td class="p-4 text-center font-semibold">b</td>
+                                <td class="p-4">Khi ấn pít-tông của một ống tiêm chứa đầy nước và bịt kín đầu kim, áp suất tác dụng lên nước được truyền theo mọi hướng.</td>
+                                <td class="p-4 text-center"><input type="radio" name="q16_2_b" value="D" class="tf-radio"></td>
+                                <td class="p-4 text-center"><input type="radio" name="q16_2_b" value="S" class="tf-radio"></td>
+                            </tr>
+                            <tr class="hover:bg-gray-50 border-b border-gray-200">
+                                <td class="p-4 text-center font-semibold">c</td>
+                                <td class="p-4">Giác mút bám vào tường nhẵn chủ yếu do lực hút từ tính giữa giác mút và tường.</td>
+                                <td class="p-4 text-center"><input type="radio" name="q16_2_c" value="D" class="tf-radio"></td>
+                                <td class="p-4 text-center"><input type="radio" name="q16_2_c" value="S" class="tf-radio"></td>
+                            </tr>
+                            <tr class="hover:bg-gray-50">
+                                <td class="p-4 text-center font-semibold">d</td>
+                                <td class="p-4">Trong bình xịt, sự chênh lệch áp suất giúp đẩy chất lỏng ra ngoài qua vòi phun.</td>
+                                <td class="p-4 text-center"><input type="radio" name="q16_2_d" value="D" class="tf-radio"></td>
+                                <td class="p-4 text-center"><input type="radio" name="q16_2_d" value="S" class="tf-radio"></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Câu 23 (Dạng bảng) -->
+            <div class="bg-white rounded-2xl shadow-lg p-6 md:p-8 card-color-4 mt-8 overflow-hidden">
+                <h2 class="text-2xl md:text-3xl font-bold mb-6 text-gray-900">Câu 23. Cho các phát biểu sau về mol, thể tích mol và tỉ khối của chất khí. Hãy xác định các phát biểu sau là Đúng (Đ) hay Sai (S)?</h2>
+                
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left border-collapse min-w-[600px]">
+                        <thead>
+                            <tr class="bg-fuchsia-100 text-fuchsia-900 text-xl">
+                                <th class="p-4 border-b-2 border-fuchsia-200 text-center font-bold rounded-tl-xl w-16">TT</th>
+                                <th class="p-4 border-b-2 border-fuchsia-200 font-bold">Phát biểu</th>
+                                <th class="p-4 border-b-2 border-fuchsia-200 text-center font-bold w-24">Đúng (Đ)</th>
+                                <th class="p-4 border-b-2 border-fuchsia-200 text-center font-bold rounded-tr-xl w-24">Sai (S)</th>
+                            </tr>
+                        </thead>
+                        <tbody class="text-lg">
+                            <tr class="hover:bg-gray-50 border-b border-gray-200">
+                                <td class="p-4 text-center font-semibold">a</td>
+                                <td class="p-4">Mol là lượng chất có chứa nguyên tử hoặc phân tử của chất đó.</td>
+                                <td class="p-4 text-center"><input type="radio" name="q23_a" value="D" class="tf-radio"></td>
+                                <td class="p-4 text-center"><input type="radio" name="q23_a" value="S" class="tf-radio"></td>
+                            </tr>
+                            <tr class="hover:bg-gray-50 border-b border-gray-200">
+                                <td class="p-4 text-center font-semibold">b</td>
+                                <td class="p-4">Ở điều kiện chuẩn (25°C và 1 bar), thể tích mol của mọi chất khí đều bằng 24,79 lít.</td>
+                                <td class="p-4 text-center"><input type="radio" name="q23_b" value="D" class="tf-radio"></td>
+                                <td class="p-4 text-center"><input type="radio" name="q23_b" value="S" class="tf-radio"></td>
+                            </tr>
+                            <tr class="hover:bg-gray-50 border-b border-gray-200">
+                                <td class="p-4 text-center font-semibold">c</td>
+                                <td class="p-4">Tỉ khối của khí A so với khí B được xác định bằng tỉ số giữa số mol của khí A và số mol của khí B.</td>
+                                <td class="p-4 text-center"><input type="radio" name="q23_c" value="D" class="tf-radio"></td>
+                                <td class="p-4 text-center"><input type="radio" name="q23_c" value="S" class="tf-radio"></td>
+                            </tr>
+                            <tr class="hover:bg-gray-50">
+                                <td class="p-4 text-center font-semibold">d</td>
+                                <td class="p-4">Tỉ khối của khí A so với không khí được tính theo công thức: d<sub>A/kk</sub> = M<sub>A</sub> / 29</td>
+                                <td class="p-4 text-center"><input type="radio" name="q23_d" value="D" class="tf-radio"></td>
+                                <td class="p-4 text-center"><input type="radio" name="q23_d" value="S" class="tf-radio"></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Câu 24 (Điền khuyết) -->
+            <div class="bg-white rounded-2xl shadow-lg p-6 md:p-8 card-color-5 mt-8">
+                <h2 class="text-2xl md:text-3xl font-bold mb-4 text-gray-900">Câu 24. Cho các phát biểu sau về mol, thể tích mol và tỉ khối của chất khí:</h2>
+                <div class="text-xl space-y-3 mb-6 text-gray-700">
+                    <p>(a) Mol là lượng chất có chứa nguyên tử hoặc phân tử của chất đó.</p>
+                    <p>(b) Ở điều kiện chuẩn (25°C và 1 bar), thể tích mol của mọi chất khí đều bằng 22,4 lít.</p>
+                    <p>(c) Tỉ khối của khí A so với khí B được xác định bằng tỉ số giữa khối lượng mol của khí A (M<sub>A</sub>) và khối lượng mol của khí B (M<sub>B</sub>).</p>
+                    <p>(d) Tỉ khối của khí A so với không khí được tính theo công thức: d<sub>A/kk</sub> = M<sub>A</sub> / 29</p>
+                </div>
+                <div class="flex items-center text-2xl font-semibold">
+                    <span class="mr-4">Số phát biểu đúng là:</span>
+                    <input type="text" name="q24" class="border-b-4 border-orange-400 bg-orange-50 focus:outline-none focus:border-orange-600 px-4 py-2 w-32 text-center rounded-t-lg transition-colors" placeholder="Điền số...">
+                </div>
+            </div>
+
+            <!-- Câu 25 (Điền khuyết) -->
+            <div class="bg-white rounded-2xl shadow-lg p-6 md:p-8 card-color-1 mt-8">
+                <h2 class="text-2xl md:text-3xl font-bold mb-6 text-gray-900 text-justify leading-snug">Câu 25. Hòa tan hoàn toàn 0,4 mol copper(II) sulfate (CuSO<sub>4</sub>) vào nước cất, thu được 200 mL dung dịch. Nồng độ mol (C<sub>M</sub>) của dung dịch CuSO<sub>4</sub> thu được bằng bao nhiêu mol/L?</h2>
+                <div class="flex items-center text-2xl font-semibold">
+                    <span class="mr-4">Đáp án:</span>
+                    <input type="text" name="q25" class="border-b-4 border-blue-400 bg-blue-50 focus:outline-none focus:border-blue-600 px-4 py-2 w-48 text-center rounded-t-lg transition-colors" placeholder="Điền số...">
+                    <span class="ml-4 text-gray-600">mol/L</span>
+                </div>
+            </div>
+
+            <!-- Câu 26 (Điền khuyết) -->
+            <div class="bg-white rounded-2xl shadow-lg p-6 md:p-8 card-color-2 mt-8">
+                <h2 class="text-2xl md:text-3xl font-bold mb-6 text-gray-900 text-justify leading-snug">Câu 26. Một vật có thể tích phần chìm trong nước là 200 cm<sup>3</sup>. Biết trọng lượng riêng của nước là 10000 N/m<sup>3</sup>. Lực đẩy Archimedes tác dụng lên vật là bao nhiêu N?</h2>
+                <div class="flex items-center text-2xl font-semibold">
+                    <span class="mr-4">Đáp án:</span>
+                    <input type="text" name="q26" class="border-b-4 border-green-400 bg-green-50 focus:outline-none focus:border-green-600 px-4 py-2 w-48 text-center rounded-t-lg transition-colors" placeholder="Điền số...">
+                    <span class="ml-4 text-gray-600">N</span>
+                </div>
+            </div>
+
+            <!-- Câu 27 (Điền khuyết) -->
+            <div class="bg-white rounded-2xl shadow-lg p-6 md:p-8 card-color-3 mt-8">
+                <h2 class="text-2xl md:text-3xl font-bold mb-6 text-gray-900 text-justify leading-snug">Câu 27. Ở điều kiện chuẩn (25<sup>o</sup>C và 1 bar) thì 1 mol khí CO<sub>2</sub> có thể tích là:</h2>
+                <div class="flex items-center text-2xl font-semibold">
+                    <span class="mr-4">Đáp án:</span>
+                    <input type="text" name="q27" class="border-b-4 border-yellow-400 bg-yellow-50 focus:outline-none focus:border-yellow-600 px-4 py-2 w-48 text-center rounded-t-lg transition-colors" placeholder="Điền số...">
+                    <span class="ml-4 text-gray-600">lít</span>
+                </div>
+            </div>
+
+            <!-- Câu 28 (Tương tác chọn) -->
+            <div class="bg-white rounded-2xl shadow-lg p-6 md:p-8 card-color-4 mt-8">
+                <h2 class="text-2xl md:text-3xl font-bold mb-4 text-gray-900">Câu 28.</h2>
+                <div class="text-xl mb-6 text-gray-800 space-y-4">
+                    <p>a. Trình bày ý nghĩa của phương trình hóa học.</p>
+                    <div class="p-5 bg-fuchsia-100/50 rounded-xl mb-4 leading-loose text-xl border border-fuchsia-200">
+                        Phương trình hóa học cho biết 
+                        <select name="q28_1" class="mx-1 px-3 py-1 bg-white border-b-2 border-fuchsia-500 text-fuchsia-700 font-bold rounded shadow-sm focus:outline-none focus:ring-2 focus:ring-fuchsia-300 cursor-pointer appearance-none text-center min-w-[200px]">
+                            <option value="" disabled selected>--- Chọn ---</option>
+                            <option value="ti_le_nguyen_tu">tỉ lệ số nguyên tử, số phân tử</option>
+                            <option value="khoi_luong">khối lượng và thể tích</option>
+                            <option value="thanh_phan">thành phần các nguyên tố</option>
+                        </select>
+                        giữa các chất cũng như từng cặp chất trong phản ứng. Tỉ lệ này đúng bằng 
+                        <select name="q28_2" class="mx-1 px-3 py-1 bg-white border-b-2 border-fuchsia-500 text-fuchsia-700 font-bold rounded shadow-sm focus:outline-none focus:ring-2 focus:ring-fuchsia-300 cursor-pointer appearance-none text-center min-w-[120px]">
+                            <option value="" disabled selected>--- Chọn ---</option>
+                            <option value="ti_le_he_so">tỉ lệ hệ số</option>
+                            <option value="ti_le_chi_so">tỉ lệ chỉ số</option>
+                            <option value="ti_le_khoi_luong">tỉ lệ khối lượng</option>
+                        </select>
+                        của mỗi chất trong phương trình.
+                    </div>
+
+                    <p class="mt-6">b. Cho 2 phương trình hóa học sau, hãy xác định tỉ lệ số mol giữa các chất tương ứng trong mỗi phản ứng trên:</p>
+                    <div class="p-5 bg-fuchsia-100/50 rounded-xl space-y-4 border border-fuchsia-200">
+                        <div class="flex flex-col md:flex-row md:items-center">
+                            <span class="font-mono text-fuchsia-700 bg-white px-4 py-2 rounded-lg border border-fuchsia-200 shadow-sm mr-4 mb-2 md:mb-0">2H<sub>2</sub> + O<sub>2</sub> &rarr; 2H<sub>2</sub>O</span>
+                            <span>&rarr; Tỉ lệ số mol H<sub>2</sub> : O<sub>2</sub> : H<sub>2</sub>O là </span>
+                            <select name="q28_3" class="mx-2 px-3 py-1 bg-white border-b-2 border-fuchsia-500 text-fuchsia-700 font-bold rounded shadow-sm focus:outline-none focus:ring-2 focus:ring-fuchsia-300 cursor-pointer appearance-none text-center">
+                                <option value="" disabled selected>--- Chọn tỉ lệ ---</option>
+                                <option value="2_2_1">2 : 2 : 1</option>
+                                <option value="2_1_2">2 : 1 : 2</option>
+                                <option value="1_2_1">1 : 2 : 1</option>
+                            </select>
+                        </div>
+                        <div class="flex flex-col md:flex-row md:items-center">
+                            <span class="font-mono text-fuchsia-700 bg-white px-4 py-2 rounded-lg border border-fuchsia-200 shadow-sm mr-4 mb-2 md:mb-0">Fe + 2HCl &rarr; FeCl<sub>2</sub> + H<sub>2</sub> &uarr;</span>
+                            <span>&rarr; Tỉ lệ số mol Fe : HCl : FeCl<sub>2</sub> : H<sub>2</sub> là </span>
+                            <select name="q28_4" class="mx-2 px-3 py-1 bg-white border-b-2 border-fuchsia-500 text-fuchsia-700 font-bold rounded shadow-sm focus:outline-none focus:ring-2 focus:ring-fuchsia-300 cursor-pointer appearance-none text-center">
+                                <option value="" disabled selected>--- Chọn tỉ lệ ---</option>
+                                <option value="1_2_1_1">1 : 2 : 1 : 1</option>
+                                <option value="1_1_2_1">1 : 1 : 2 : 1</option>
+                                <option value="2_1_1_2">2 : 1 : 1 : 2</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Câu 29 (Tính toán theo cấu trúc) -->
+            <div class="bg-white rounded-2xl shadow-lg p-6 md:p-8 card-color-5 mt-8">
+                <h2 class="text-2xl md:text-3xl font-bold mb-4 text-gray-900 text-justify leading-snug">Câu 29. Trong xu hướng phát triển giao thông phát thải thấp, một số mẫu ô tô điện sử dụng pin nhiên liệu hydrogen (H<sub>2</sub>) đã được thương mại hóa... Phương trình hóa học tổng quát của phản ứng được biểu diễn như sau: <br>
+                <div class="text-center my-4"><span class="font-mono text-orange-700 bg-orange-100 px-6 py-3 rounded-lg border border-orange-200">2H<sub>2</sub> + O<sub>2</sub> &rarr; 2H<sub>2</sub>O</span></div>
+                </h2>
+                <div class="text-xl mb-6 text-gray-800 font-medium">
+                    <p>Giả sử động cơ xe tiêu thụ hết 0,6 mol khí H<sub>2</sub>. Hoàn thành các bước tính toán sau:</p>
+                    <p class="text-lg italic text-gray-500 mb-4">(Cho biết khối lượng mol nguyên tử: H = 1 g/mol; O = 16 g/mol)</p>
+                    
+                    <div class="bg-orange-50 p-6 rounded-xl border border-orange-200 space-y-6 leading-loose">
+                        <!-- Bước 1 -->
+                        <div>
+                            <div class="font-bold text-orange-800 border-b border-orange-200 pb-2 mb-2">Bước 1: Xác định số mol đề bài cho</div>
+                            Theo đề bài, số mol khí hydrogen (H<sub>2</sub>) đã tiêu thụ là: n<sub>H2</sub> = 
+                            <select class="mx-1 px-3 py-1 bg-white border-b-2 border-orange-500 text-orange-700 font-bold rounded shadow-sm focus:outline-none cursor-pointer appearance-none text-center">
+                                <option value="" disabled selected>...</option>
+                                <option value="0.3">0,3</option>
+                                <option value="0.6">0,6</option>
+                                <option value="1.2">1,2</option>
+                            </select> mol.
+                        </div>
+
+                        <!-- Bước 2 & 3 -->
+                        <div>
+                            <div class="font-bold text-orange-800 border-b border-orange-200 pb-2 mb-2">Bước 2 & 3: Viết PTHH và Tính số mol theo quy tắc tam suất</div>
+                            <div class="flex items-center justify-center space-x-2 my-3 font-mono text-2xl">
+                                <select class="px-2 py-1 bg-white border border-orange-300 text-orange-700 font-bold rounded focus:outline-none cursor-pointer appearance-none text-center"><option value="" disabled selected>...</option><option value="1">1</option><option value="2">2</option><option value="3">3</option></select>
+                                <span>H<sub>2</sub> + </span>
+                                <select class="px-2 py-1 bg-white border border-orange-300 text-orange-700 font-bold rounded focus:outline-none cursor-pointer appearance-none text-center"><option value="" disabled selected>...</option><option value="1">1</option><option value="2">2</option><option value="3">3</option></select>
+                                <span>O<sub>2</sub> &rarr; </span>
+                                <select class="px-2 py-1 bg-white border border-orange-300 text-orange-700 font-bold rounded focus:outline-none cursor-pointer appearance-none text-center"><option value="" disabled selected>...</option><option value="1">1</option><option value="2">2</option><option value="3">3</option></select>
+                                <span>H<sub>2</sub>O</span>
+                            </div>
+                            
+                            <ul class="list-disc list-inside space-y-2 ml-2 mt-4">
+                                <li>
+                                    <span class="font-semibold text-gray-700">Theo PTHH:</span> Cứ 
+                                    <select class="mx-1 px-2 py-1 bg-white border-b-2 border-orange-500 text-orange-700 font-bold rounded shadow-sm focus:outline-none cursor-pointer appearance-none text-center"><option value="" disabled selected>...</option><option value="1">1</option><option value="2">2</option></select> 
+                                    mol H<sub>2</sub> phản ứng thì cần 
+                                    <select class="mx-1 px-2 py-1 bg-white border-b-2 border-orange-500 text-orange-700 font-bold rounded shadow-sm focus:outline-none cursor-pointer appearance-none text-center"><option value="" disabled selected>...</option><option value="1">1</option><option value="2">2</option></select> 
+                                    mol O<sub>2</sub> và sinh ra 
+                                    <select class="mx-1 px-2 py-1 bg-white border-b-2 border-orange-500 text-orange-700 font-bold rounded shadow-sm focus:outline-none cursor-pointer appearance-none text-center"><option value="" disabled selected>...</option><option value="1">1</option><option value="2">2</option></select> 
+                                    mol H<sub>2</sub>O.
+                                </li>
+                                <li>
+                                    <span class="font-semibold text-gray-700">Theo đề bài:</span> Với 0,6 mol H<sub>2</sub> tham gia phản ứng: <br>
+                                    <span class="ml-6">&rarr; Số mol O<sub>2</sub> cần dùng: n<sub>O2</sub> = (0,6 &times; 1) / 2 = </span>
+                                    <select class="mx-1 px-2 py-1 bg-white border-b-2 border-orange-500 text-orange-700 font-bold rounded shadow-sm focus:outline-none cursor-pointer appearance-none text-center"><option value="" disabled selected>...</option><option value="0.3">0,3</option><option value="0.6">0,6</option><option value="1.2">1,2</option></select> mol. <br>
+                                    <span class="ml-6">&rarr; Số mol H<sub>2</sub>O tạo thành: n<sub>H2O</sub> = (0,6 &times; 2) / 2 = </span>
+                                    <select class="mx-1 px-2 py-1 bg-white border-b-2 border-orange-500 text-orange-700 font-bold rounded shadow-sm focus:outline-none cursor-pointer appearance-none text-center"><option value="" disabled selected>...</option><option value="0.3">0,3</option><option value="0.6">0,6</option><option value="1.2">1,2</option></select> mol.
+                                </li>
+                            </ul>
+                        </div>
+
+                        <!-- Bước 4 -->
+                        <div>
+                            <div class="font-bold text-orange-800 border-b border-orange-200 pb-2 mb-2">Bước 4: Tính kết quả (thể tích và khối lượng)</div>
+                            <p>a. Thể tích khí O<sub>2</sub> (ở đkc) cần dùng: <br>
+                               V<sub>O2</sub> = n &times; 24,79 = 0,3 &times; 24,79 =  
+                               <select class="mx-1 px-3 py-1 bg-white border-b-2 border-orange-500 text-orange-700 font-bold rounded shadow-sm focus:outline-none cursor-pointer appearance-none text-center"><option value="" disabled selected>--- Chọn ---</option><option value="7.437">7,437</option><option value="14.874">14,874</option><option value="2.479">2,479</option></select> lít.
+                            </p>
+                            <p class="mt-2">b. Khối lượng H<sub>2</sub>O tạo thành: <br>
+                               m<sub>H2O</sub> = n &times; M = 0,6 &times; 18 = 
+                               <select class="mx-1 px-3 py-1 bg-white border-b-2 border-orange-500 text-orange-700 font-bold rounded shadow-sm focus:outline-none cursor-pointer appearance-none text-center"><option value="" disabled selected>--- Chọn ---</option><option value="5.4">5,4</option><option value="10.8">10,8</option><option value="21.6">21,6</option></select> gam.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Câu 30 (Tự luận) -->
+            <div class="bg-white rounded-2xl shadow-lg p-6 md:p-8 card-color-1 mt-8">
+                <h2 class="text-2xl md:text-3xl font-bold mb-6 text-gray-900 text-justify leading-snug">Câu 30. Một khối hộp chữ nhật có khối lượng 120 gam, kích thước dài 5 cm, rộng 4 cm, cao 3 cm. Em hãy nêu cách xác định khối lượng riêng của khối hộp bằng các dụng cụ thực hành phù hợp.</h2>
+                <textarea name="q30_ans" rows="5" class="w-full p-4 text-xl border-2 border-blue-200 rounded-xl focus:outline-none focus:border-blue-500 focus:ring-4 focus:ring-blue-100 transition-all bg-blue-50" placeholder="Viết câu trả lời của bạn vào đây..."></textarea>
+            </div>
+
+            <!-- Câu 31 (Tương tác chọn) -->
+            <div class="bg-white rounded-2xl shadow-lg p-6 md:p-8 card-color-2 mt-8">
+                <h2 class="text-2xl md:text-3xl font-bold mb-4 text-gray-900">Câu 31.</h2>
+                <div class="text-xl mb-6 text-gray-800 space-y-6 font-medium leading-loose">
+                    <div class="p-5 bg-green-50 rounded-xl border border-green-200">
+                        <p class="font-bold text-green-800 mb-2">a. Khái niệm phản ứng hóa học:</p>
+                        Phản ứng hoá học là quá trình biến đổi từ 
+                        <select class="mx-1 px-2 py-1 bg-white border-b-2 border-green-500 text-green-700 font-bold rounded shadow-sm focus:outline-none cursor-pointer appearance-none text-center">
+                            <option value="" disabled selected>--- Chọn ---</option>
+                            <option value="1">trạng thái rắn sang lỏng</option>
+                            <option value="2">chất này thành chất khác</option>
+                            <option value="3">màu sắc của chất</option>
+                        </select>.<br> 
+                        Chất ban đầu bị biến đổi trong phản ứng gọi là 
+                        <select class="mx-1 px-2 py-1 bg-white border-b-2 border-green-500 text-green-700 font-bold rounded shadow-sm focus:outline-none cursor-pointer appearance-none text-center">
+                            <option value="" disabled selected>--- Chọn ---</option>
+                            <option value="chat_phan_ung">chất phản ứng</option>
+                            <option value="san_pham">sản phẩm</option>
+                        </select> (hay chất tham gia).<br>
+                        Chất mới sinh ra gọi là 
+                        <select class="mx-1 px-2 py-1 bg-white border-b-2 border-green-500 text-green-700 font-bold rounded shadow-sm focus:outline-none cursor-pointer appearance-none text-center">
+                            <option value="" disabled selected>--- Chọn ---</option>
+                            <option value="chat_phan_ung">chất phản ứng</option>
+                            <option value="san_pham">sản phẩm</option>
+                        </select>.
+                    </div>
+
+                    <div class="p-5 bg-green-50 rounded-xl border border-green-200">
+                        <p class="font-bold text-green-800 mb-2">b. Ví dụ:</p>
+                        - <span class="font-semibold underline">Sự biến đổi vật lí:</span> Nước lỏng đun sôi chuyển thành 
+                        <select class="mx-1 px-2 py-1 bg-white border-b-2 border-green-500 text-green-700 font-bold rounded shadow-sm focus:outline-none cursor-pointer appearance-none text-center">
+                            <option value="" disabled selected>--- Chọn ---</option>
+                            <option value="hoi_nuoc">hơi nước</option>
+                            <option value="khi_H2_O2">khí H2 và O2</option>
+                        </select> (không có chất mới sinh ra).<br>
+                        - <span class="font-semibold underline">Sự biến đổi hóa học:</span> Đốt than (carbon) trong không khí sinh ra 
+                        <select class="mx-1 px-2 py-1 bg-white border-b-2 border-green-500 text-green-700 font-bold rounded shadow-sm focus:outline-none cursor-pointer appearance-none text-center">
+                            <option value="" disabled selected>--- Chọn ---</option>
+                            <option value="tro_bui">hơi nước</option>
+                            <option value="khi_co2">khí carbon dioxide</option>
+                        </select> (có chất mới sinh ra).
+                    </div>
+
+                    <div class="p-5 bg-green-50 rounded-xl border border-green-200">
+                        <p class="font-bold text-green-800 mb-2">c. Tính số mol:</p>
+                        Số mol của 6,1975 lít khí hydrogen ở điều kiện chuẩn là:<br>
+                        n = V / 24,79 = 6,1975 / 24,79 = 
+                        <select class="mx-1 px-3 py-1 bg-white border-b-2 border-green-500 text-green-700 font-bold rounded shadow-sm focus:outline-none cursor-pointer appearance-none text-center">
+                            <option value="" disabled selected>--- Chọn ---</option>
+                            <option value="0.5">0,5</option>
+                            <option value="0.25">0,25</option>
+                            <option value="0.125">0,125</option>
+                        </select> mol.
+                    </div>
+                </div>
+            </div>
+
+            <!-- Câu 32 (Tính toán theo cấu trúc) -->
+            <div class="bg-white rounded-2xl shadow-lg p-6 md:p-8 card-color-3 mt-8 mb-12">
+                <h2 class="text-2xl md:text-3xl font-bold mb-6 text-gray-900 text-justify leading-snug">Câu 32. Cho 16,8 gam sắt (iron) cháy trong oxygen thu được 23,2 gam oxide. Tính khối lượng oxygen tham gia phản ứng cháy? <br>
+                <span class="text-lg italic text-gray-500 font-normal mt-2 block">(Cho biết khối lượng mol nguyên tử: Fe = 56 g/mol; O = 16 g/mol)</span>
+                </h2>
+                
+                <div class="text-xl text-gray-800 font-medium">
+                    <p class="mb-4">Hoàn thành các bước giải bài toán theo phương trình hóa học dưới đây:</p>
+                    
+                    <div class="bg-yellow-50/70 p-6 rounded-xl border border-yellow-200 space-y-6 leading-loose">
+                        <!-- Bước 1 -->
+                        <div>
+                            <div class="font-bold text-yellow-800 border-b border-yellow-200 pb-2 mb-2">Bước 1: Tính số mol của chất đã biết (Sắt - Fe)</div>
+                            Số mol sắt tham gia phản ứng là: n<sub>Fe</sub> = m / M = 16,8 / 
+                            <select class="mx-1 px-3 py-1 bg-white border-b-2 border-yellow-500 text-yellow-700 font-bold rounded shadow-sm focus:outline-none cursor-pointer appearance-none text-center"><option value="" disabled selected>...</option><option value="56">56</option><option value="16">16</option></select> 
+                            = 
+                            <select class="mx-1 px-3 py-1 bg-white border-b-2 border-yellow-500 text-yellow-700 font-bold rounded shadow-sm focus:outline-none cursor-pointer appearance-none text-center"><option value="" disabled selected>...</option><option value="0.2">0,2</option><option value="0.3">0,3</option><option value="0.4">0,4</option></select> mol.
+                        </div>
+
+                        <!-- Bước 2 & 3 -->
+                        <div>
+                            <div class="font-bold text-yellow-800 border-b border-yellow-200 pb-2 mb-2">Bước 2 & 3: Viết PTHH và Tính số mol O<sub>2</sub> theo quy tắc tam suất</div>
+                            <div class="flex items-center justify-center space-x-2 my-3 font-mono text-2xl">
+                                <select class="px-2 py-1 bg-white border border-yellow-300 text-yellow-700 font-bold rounded focus:outline-none cursor-pointer appearance-none text-center"><option value="" disabled selected>...</option><option value="2">2</option><option value="3">3</option><option value="4">4</option></select>
+                                <span>Fe + </span>
+                                <select class="px-2 py-1 bg-white border border-yellow-300 text-yellow-700 font-bold rounded focus:outline-none cursor-pointer appearance-none text-center"><option value="" disabled selected>...</option><option value="1">1</option><option value="2">2</option><option value="3">3</option></select>
+                                <span>O<sub>2</sub> &rarr; </span>
+                                <select class="px-2 py-1 bg-white border border-yellow-300 text-yellow-700 font-bold rounded focus:outline-none cursor-pointer appearance-none text-center"><option value="" disabled selected>...</option><option value="1">1</option><option value="2">2</option><option value="3">3</option></select>
+                                <span>Fe<sub>3</sub>O<sub>4</sub> </span>
+                            </div>
+                            <span class="text-base italic text-gray-500 block text-center mb-4">(Phản ứng tạo ra Iron(II,III) oxide - Fe<sub>3</sub>O<sub>4</sub>)</span>
+                            
+                            <ul class="list-disc list-inside space-y-2 ml-2">
+                                <li>
+                                    <span class="font-semibold text-gray-700">Theo PTHH:</span> Cứ 
+                                    <select class="mx-1 px-2 py-1 bg-white border-b-2 border-yellow-500 text-yellow-700 font-bold rounded shadow-sm focus:outline-none cursor-pointer appearance-none text-center"><option value="" disabled selected>...</option><option value="2">2</option><option value="3">3</option><option value="4">4</option></select> 
+                                    mol Fe phản ứng thì cần 
+                                    <select class="mx-1 px-2 py-1 bg-white border-b-2 border-yellow-500 text-yellow-700 font-bold rounded shadow-sm focus:outline-none cursor-pointer appearance-none text-center"><option value="" disabled selected>...</option><option value="1">1</option><option value="2">2</option><option value="3">3</option></select> 
+                                    mol O<sub>2</sub>.
+                                </li>
+                                <li>
+                                    <span class="font-semibold text-gray-700">Theo đề bài:</span> Với 0,3 mol Fe tham gia phản ứng: <br>
+                                    <span class="ml-6">&rarr; Số mol O<sub>2</sub> cần dùng: n<sub>O2</sub> = (0,3 &times; 2) / 3 = </span>
+                                    <select class="mx-1 px-2 py-1 bg-white border-b-2 border-yellow-500 text-yellow-700 font-bold rounded shadow-sm focus:outline-none cursor-pointer appearance-none text-center"><option value="" disabled selected>...</option><option value="0.2">0,2</option><option value="0.3">0,3</option><option value="0.4">0,4</option></select> mol.
+                                </li>
+                            </ul>
+                        </div>
+
+                        <!-- Bước 4 -->
+                        <div>
+                            <div class="font-bold text-yellow-800 border-b border-yellow-200 pb-2 mb-2">Bước 4: Tính khối lượng oxygen tham gia</div>
+                            <p>
+                               Khối lượng oxygen (O<sub>2</sub>) tham gia phản ứng là: <br>
+                               m<sub>O2</sub> = n &times; M = 0,2 &times; 
+                               <select class="mx-1 px-3 py-1 bg-white border-b-2 border-yellow-500 text-yellow-700 font-bold rounded shadow-sm focus:outline-none cursor-pointer appearance-none text-center"><option value="" disabled selected>...</option><option value="16">16</option><option value="32">32</option></select> 
+                               =  
+                               <select class="mx-1 px-3 py-1 bg-white border-b-2 border-yellow-500 text-yellow-700 font-bold rounded shadow-sm focus:outline-none cursor-pointer appearance-none text-center"><option value="" disabled selected>--- Chọn ---</option><option value="3.2">3,2</option><option value="6.4">6,4</option><option value="9.6">9,6</option></select> gam.
+                            </p>
+                        </div>
+                        
+                        <div class="mt-4 p-3 bg-yellow-100/50 rounded-lg text-lg border border-yellow-300">
+                            <span class="font-bold text-yellow-700">💡 Gợi ý thêm:</span> Bài này cũng có thể giải nhanh bằng <span class="font-semibold text-yellow-800">Định luật bảo toàn khối lượng</span>:<br>
+                            m<sub>Fe</sub> + m<sub>O2</sub> = m<sub>Oxide</sub> &rarr; 16,8 + m<sub>O2</sub> = 23,2 &rarr; m<sub>O2</sub> = 23,2 - 16,8 = <span class="font-bold text-yellow-800">6,4 gam</span>.
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Nút nộp bài -->
+            <div class="text-center pb-20">
+                <button type="submit" class="bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white font-bold py-5 px-12 rounded-full text-2xl shadow-xl transform transition hover:-translate-y-1 hover:shadow-2xl">
+                    Hoàn thành & Nộp bài
+                </button>
+            </div>
+
+        </form>
+    </main>
+
+    <!-- Modal Thông báo nộp bài -->
+    <div id="submitModal" class="fixed inset-0 z-[100] hidden flex items-center justify-center modal-overlay">
+        <div class="bg-white rounded-3xl p-8 max-w-lg w-full mx-4 shadow-2xl transform scale-95 opacity-0 transition-all duration-300" id="modalContent">
+            <div class="text-center">
+                <div class="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-6">
+                    <svg class="w-10 h-10 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path>
+                    </svg>
+                </div>
+                <h3 class="text-3xl font-bold text-gray-900 mb-4">Nộp bài thành công!</h3>
+                <p class="text-xl text-gray-600 mb-8">Bạn đã hoàn thành bài ôn tập. Hệ thống đã ghi nhận các câu trả lời của bạn.</p>
+                <button onclick="closeModal()" class="w-full bg-gray-900 hover:bg-gray-800 text-white font-bold py-4 rounded-xl text-xl transition-colors">
+                    Đóng thông báo
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function submitQuiz() {
+            const modal = document.getElementById('submitModal');
+            const modalContent = document.getElementById('modalContent');
+            
+            // Hiển thị modal
+            modal.classList.remove('hidden');
+            
+            // Trigger animation
+            setTimeout(() => {
+                modalContent.classList.remove('scale-95', 'opacity-0');
+                modalContent.classList.add('scale-100', 'opacity-100');
+            }, 10);
+            
+            // Cuộn lên đầu trang nhẹ nhàng ở background
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function closeModal() {
+            const modal = document.getElementById('submitModal');
+            const modalContent = document.getElementById('modalContent');
+            
+            // Animation ẩn đi
+            modalContent.classList.remove('scale-100', 'opacity-100');
+            modalContent.classList.add('scale-95', 'opacity-0');
+            
+            setTimeout(() => {
+                modal.classList.add('hidden');
+            }, 300);
+        }
+    </script>
+</body>
+</html>
